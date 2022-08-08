@@ -1,0 +1,21 @@
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+:host:hover {
+  cursor: pointer;
+}
+
+span {
+  font-size: 12px;
+  color: #333333;
+}
+
+.icon {
+  display: block;
+  font-size: 12px;
+  margin-left: 10px;
+}

@@ -1,0 +1,64 @@
+<div
+  class="px-4 d-flex justify-content-between flex-wrap flex-sm-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+>
+  <h1 class="h2">Dique paso de las piedras</h1>
+  <form>
+    <div class="row mx-0">
+      <div class="col-md px-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div
+              style="border-bottom-right-radius: 0; border-top-right-radius: 0"
+              class="input-group-text"
+            >
+              <fa-icon [icon]="faCalendar" style="color: #333333"></fa-icon>
+            </div>
+          </div>
+          <input
+            name="dateFilter"
+            type="text"
+            placeholder="Daterangepicker"
+            class="form-control"
+            bsDaterangepicker
+            [bsConfig]="{ isAnimated: true }"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            [(ngModel)]="dateFilter"
+            (bsValueChange)="loadData($event)"
+          />
+        </div>
+      </div>
+      <div class="col px-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div
+              style="border-bottom-right-radius: 0; border-top-right-radius: 0"
+              class="input-group-text"
+            >
+              <fa-icon [icon]="faAngleDown" style="color: #333333"></fa-icon>
+            </div>
+          </div>
+          <select
+            class="form-control"
+            name="value"
+            [(ngModel)]="value"
+            (change)="loadData($event)"
+          >
+            <option value selected disabled>Elegir</option>
+            <option value="caudal">Caudal de Salida</option>
+            <option value="nivel">Nivel del dique</option>
+            <option value="oxigeno">Oxigeno</option>
+            <option value="ph">Ph</option>
+            <option value="temperatura">Temperatura</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container" style="width: 100%; height: 50vh">
+  <canvas id="nivel">
+    {{ nivel }}
+  </canvas>
+</div>
