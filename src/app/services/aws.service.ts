@@ -1,10 +1,4 @@
 import { Injectable } from '@angular/core';
-import {
-  IoTDataPlaneClient,
-  GetThingShadowCommand,
-  GetThingShadowCommandOutput,
-} from '@aws-sdk/client-iot-data-plane';
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
@@ -20,14 +14,6 @@ const url = 'API_URL';
   providedIn: 'root',
 })
 export class AwsService {
-  private client: IoTDataPlaneClient = new IoTDataPlaneClient({
-    region: 'us-east-1',
-    credentials: {
-      accessKeyId: environment.accessKeyId,
-      secretAccessKey: environment.secretAccessKey,
-    },
-  });
-
   constructor(private http: HttpClient) {}
 
   getSavedShadows(): Observable<any> {
