@@ -8,7 +8,7 @@ const httpOptions = {
   }),
 };
 
-const url = 'API_URL';
+const url = 'https://owrvd3fj55.execute-api.us-east-1.amazonaws.com/v2/results';
 
 @Injectable({
   providedIn: 'root',
