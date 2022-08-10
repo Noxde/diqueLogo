@@ -17,7 +17,13 @@ export class AwsService {
   constructor(private http: HttpClient) {}
 
   getSavedShadows(): Observable<any> {
-    return this.http.get<any>(url, httpOptions).pipe(map((res) => res.Items));
+    return this.http
+      .get<any>(url, httpOptions)
+      .pipe(
+        map((res) =>
+          res.Items.sort((a: any, b: any) => a.timestamp - b.timestamp)
+        )
+      );
   }
 
   getFromDates(dateFrom: Date, dateTo: Date) {
