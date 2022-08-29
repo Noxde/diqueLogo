@@ -21,9 +21,8 @@ export class MainComponent implements OnInit {
   //Charts options
   locale = 'es';
   dates!: any[];
-  values = ['nivel', 'caudal', 'oxigeno'];
   value: string = '';
-  fill = false;
+  fill = true;
   tension = 0.1;
 
   //Dates
@@ -48,17 +47,34 @@ export class MainComponent implements OnInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Fecha',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Valor',
+            },
+          },
+        },
       },
       data: {
         labels: this.dates,
         datasets: [
           {
-            label: '',
+            label: 'Seleccione un rango de fechas y dato a mostrar',
             data: [],
             fill: this.fill,
             borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgb(45, 224, 221)',
+            backgroundColor: 'rgba(45, 224, 221, 0.2)',
             pointBackgroundColor: 'rgb(0,0,0)',
+            pointHoverBackgroundColor: 'rgb(255, 255, 255)',
+            pointHoverBorderColor: '#4bc0c0',
+            pointHoverRadius: 7,
             tension: this.tension,
           },
         ],
