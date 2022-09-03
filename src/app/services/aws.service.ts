@@ -25,24 +25,4 @@ export class AwsService {
         )
       );
   }
-
-  getFromDates(dateFrom: Date, dateTo: Date) {
-    return this.getSavedShadows().pipe(
-      map((res) =>
-        res.filter(
-          //@ts-ignore
-          (val) =>
-            new Date(val.timestamp) >= dateFrom &&
-            new Date(val.timestamp) <= dateTo
-        )
-      )
-    );
-  }
-
-  getPropertyValues(property: string): Observable<any[]> {
-    return this.getSavedShadows().pipe(
-      //@ts-ignore
-      map((data) => data.map((x) => x[property]))
-    );
-  }
 }

@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.info-icon {
+  margin-right: 0.5rem;
+}

@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -15,6 +15,7 @@ import { BurgerMenuComponent } from './components/burger-menu/burger-menu.compon
 import { MainComponent } from './components/main/main.component';
 
 import { defineLocale, esLocale } from 'ngx-bootstrap/chronos';
+import { AlertComponent } from './components/alert/alert.component';
 defineLocale('es', esLocale);
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ defineLocale('es', esLocale);
     NavItemComponent,
     BurgerMenuComponent,
     MainComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

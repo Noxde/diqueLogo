@@ -37,6 +37,13 @@ img {
   border-bottom: 5px solid #99cc33;
 }
 
+.alert {
+  background-color: #cc3721;
+  margin: 0;
+  border-radius: 0;
+  color: white;
+}
+
 @media (max-width: 1310px) {
   .nav {
     display: none;

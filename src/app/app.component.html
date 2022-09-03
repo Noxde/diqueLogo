@@ -1,3 +1,9 @@
+<app-alert
+  *ngIf="alerta"
+  (closeAlert)="closeAlert($event)"
+  [@alertAnim]
+  class="alert"
+></app-alert>
 <header>
   <div class="socials"></div>
   <div class="header">
@@ -21,4 +27,4 @@
     <app-burger-menu class="burger"></app-burger-menu>
   </div>
 </header>
-<app-main></app-main>
+<app-main (showAlert)="handler($event)"></app-main>
