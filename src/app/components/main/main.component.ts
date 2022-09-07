@@ -107,7 +107,7 @@ export class MainComponent implements OnInit {
             ? this.showAlert.emit(true)
             : this.showAlert.emit(false);
         }
-      }, 10);
+      }, 250);
     }
   }
 
@@ -117,7 +117,6 @@ export class MainComponent implements OnInit {
       if (this.dateFilter && this.value) {
         let [from, to] = this.dateFilter;
         console.log(this.data);
-        console.log(from, to);
         let data = this.data.data.filter(
           //@ts-ignore
           (val) =>
@@ -144,9 +143,12 @@ export class MainComponent implements OnInit {
   }
 
   getNewData(callback?: Function) {
+    //Gets all the data from the database in aws
     this.dataBase.getSavedShadows().subscribe((data) => {
+      //Creates a new maxdate for the datepicker and adds 1 day to it to avoid any errors
       this.maxDate = new Date(data[data.length - 1].timestamp);
       this.maxDate.setHours(this.maxDate.getHours() + 24);
+      //New object to save to localstorage containing the expire timestamp
       let setExpiry = {
         data: data,
         isAlert: data[data.length - 1].nivel < 130,
@@ -154,6 +156,7 @@ export class MainComponent implements OnInit {
       };
       this.data = setExpiry;
       window.localStorage.setItem('LogoData', JSON.stringify(setExpiry));
+      //If theres a callback passed to the function call it
       callback != undefined ? callback(setExpiry) : null;
     });
   }
