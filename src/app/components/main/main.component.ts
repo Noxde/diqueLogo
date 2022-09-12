@@ -151,7 +151,9 @@ export class MainComponent implements OnInit {
       //New object to save to localstorage containing the expire timestamp
       let setExpiry = {
         data: data,
-        isAlert: data[data.length - 1].nivel < 130,
+        isAlert:
+          data[data.length - 1].nivel >= 149 &&
+          data[data.length - 1].nivel <= 152,
         expires: new Date().getTime() + 60_000,
       };
       this.data = setExpiry;
