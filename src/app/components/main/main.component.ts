@@ -15,7 +15,7 @@ import { AwsService } from 'src/app/services/aws.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  @Output() showAlert = new EventEmitter<boolean>();
+  @Output() showAlert = new EventEmitter<Array<string>>();
 
   data = JSON.parse(window.localStorage.getItem('LogoData')!) || undefined;
 
@@ -36,6 +36,8 @@ export class MainComponent implements OnInit {
   minDate!: Date;
   dateFilter!: Date[];
   maxDate!: Date;
+
+  alertas: string[] = [];
 
   constructor(
     private localeService: BsLocaleService,
@@ -97,15 +99,11 @@ export class MainComponent implements OnInit {
           console.warn('Data Expired.');
           this.getNewData((data: any) => {
             console.info('New data saved.');
-            data.isAlert
-              ? this.showAlert.emit(true)
-              : this.showAlert.emit(false);
+            this.checkAlerts();
           }); //If it then fetch new data and save it
         } else {
+          this.checkAlerts();
           //This checks whenever there is already localstorage and its not expired yet
-          this.data.isAlert
-            ? this.showAlert.emit(true)
-            : this.showAlert.emit(false);
         }
       }, 250);
     }
@@ -116,7 +114,6 @@ export class MainComponent implements OnInit {
     setTimeout(() => {
       if (this.dateFilter && this.value) {
         let [from, to] = this.dateFilter;
-        console.log(this.data);
         let data = this.data.data.filter(
           //@ts-ignore
           (val) =>
@@ -126,7 +123,7 @@ export class MainComponent implements OnInit {
         const values = data.map((x) => x[this.value]);
         //@ts-ignore
         const dates = data.map((x) =>
-          this.datepipe.transform(x['timestamp'], 'dd/MM/YY')
+          this.datepipe.transform(x['timestamp'], 'dd/MM/YY, hh:mm a')
         );
         this.chart.data.datasets[0].data = values;
         this.chart.data.datasets[0].label =
@@ -151,9 +148,6 @@ export class MainComponent implements OnInit {
       //New object to save to localstorage containing the expire timestamp
       let setExpiry = {
         data: data,
-        isAlert:
-          data[data.length - 1].nivel >= 149 &&
-          data[data.length - 1].nivel <= 152,
         expires: new Date().getTime() + 60_000,
       };
       this.data = setExpiry;
@@ -161,5 +155,31 @@ export class MainComponent implements OnInit {
       //If theres a callback passed to the function call it
       callback != undefined ? callback(setExpiry) : null;
     });
+  }
+
+  checkAlerts() {
+    let { nivel, oxigeno, ph, conductividad } =
+      this.data.data[this.data.data.length - 1];
+
+    // Alerta nivel
+    switch (true) {
+      case nivel >= 158:
+        this.alertas.push('nivelSalida');
+        break;
+      case nivel >= 155:
+        this.alertas.push('nivel1');
+        break;
+      case nivel >= 152:
+        this.alertas.push('nivel2');
+        break;
+      case nivel >= 150:
+        this.alertas.push('nivel3');
+        break;
+    }
+
+    if (oxigeno < 5 || ph < 6.5 || ph > 8.5 || conductividad > 2500) {
+      this.alertas.push('calidad');
+    }
+    this.showAlert.emit(this.alertas);
   }
 }
