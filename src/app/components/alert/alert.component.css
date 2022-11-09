@@ -3,6 +3,22 @@
   align-items: center;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.alert-div {
+  display: inherit;
+  align-items: center;
+  width: 100%;
+}
+
+.alert-div:not(:first-of-type) {
+  margin-top: 1rem;
+}
+
 .spacer {
   flex: 1;
 }

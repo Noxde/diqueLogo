@@ -1,13 +1,16 @@
-<fa-icon
-  class="info-icon"
-  [icon]="faCircleExclamation"
-  style="color: #fff"
-></fa-icon>
-Alerta nivel 3 por cota del dique a 150m.s.n.m, se recomienda suspender todas
-las actividades recreativas en el embalse.
-<div class="spacer"></div>
-<fa-icon
-  [icon]="faXmark"
-  (click)="close()"
-  style="color: #424242; cursor: pointer"
-></fa-icon>
+<div class="wrapper">
+  <div class="alert-div" *ngFor="let alerta of alertas">
+    <fa-icon
+      class="info-icon"
+      [icon]="faCircleExclamation"
+      style="color: #fff"
+    ></fa-icon>
+    {{ alertasTexto[alerta] }}
+    <div class="spacer"></div>
+    <fa-icon
+      [icon]="faXmark"
+      (click)="close()"
+      style="color: #424242; cursor: pointer"
+    ></fa-icon>
+  </div>
+</div>
