@@ -31,7 +31,8 @@ export class AppComponent {
   title = 'diqueLogo';
 
   alerta = false;
-  nivelAlerta!: number;
+
+  testAlertas = [];
 
   constructor() {}
 
@@ -40,11 +41,8 @@ export class AppComponent {
   }
 
   handler(event: any) {
-    if (event) {
-      this.alerta = true;
-    } else {
-      this.alerta = false;
-    }
+    this.testAlertas = event;
+    this.alerta = true;
   }
 
   ngOnInit() {}
