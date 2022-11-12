@@ -90,7 +90,7 @@ export class MainComponent implements OnInit {
     });
     //If there's no localstorage then fetch database and save it
     if (!this.data) {
-      this.getNewData();
+      this.getNewData(() => this.checkAlerts());
     } else {
       //Fix for ExpressionChangedAfterItHasBeenCheckedError
       setTimeout(() => {
@@ -158,8 +158,8 @@ export class MainComponent implements OnInit {
   }
 
   checkAlerts() {
-    let { nivel, oxigeno, ph, conductividad } =
-      this.data.data[this.data.data.length - 1];
+    let { data } = this.data;
+    let { nivel, oxigeno, ph, conductividad } = data[this.data.data.length - 1];
 
     // Alerta nivel
     switch (true) {
