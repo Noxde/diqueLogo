@@ -70,6 +70,7 @@ export class MainComponent implements OnInit {
           },
         },
       },
+
       data: {
         labels: this.dates,
         datasets: [
@@ -126,8 +127,36 @@ export class MainComponent implements OnInit {
           this.datepipe.transform(x['timestamp'], 'dd/MM/YY, hh:mm a')
         );
         this.chart.data.datasets[0].data = values;
-        this.chart.data.datasets[0].label =
-          this.value.charAt(0).toUpperCase() + this.value.slice(1);
+        switch (this.value) {
+          case 'caudal':
+            this.chart.data.datasets[0].label =
+              this.value.charAt(0).toUpperCase() +
+              this.value.slice(1) +
+              ' (m³/s)';
+            break;
+          case 'nivel':
+            this.chart.data.datasets[0].label =
+              this.value.charAt(0).toUpperCase() +
+              this.value.slice(1) +
+              ' (m.s.n.m)';
+            break;
+          case 'oxigeno':
+            this.chart.data.datasets[0].label =
+              this.value.charAt(0).toUpperCase() +
+              this.value.slice(1) +
+              ' (mg/l)';
+            break;
+          case 'ph':
+            this.chart.data.datasets[0].label =
+              this.value.charAt(0).toUpperCase() + this.value.slice(1);
+            break;
+          case 'conductividad':
+            this.chart.data.datasets[0].label =
+              this.value.charAt(0).toUpperCase() +
+              this.value.slice(1) +
+              ' (μS/cm)';
+            break;
+        }
 
         this.chart.data.labels = dates;
 
