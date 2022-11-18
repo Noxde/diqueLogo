@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   value: string = '';
 
   //Dates
-  minDate!: Date;
+  minDate = new Date('2022-1-2');
   dateFilter!: Date[];
   maxDate!: Date;
 
@@ -45,7 +45,6 @@ export class MainComponent implements OnInit {
     private datepipe: DatePipe
   ) {
     this.localeService.use(this.locale);
-    this.minDate = new Date('2022-1-1');
   }
 
   ngOnInit(): void {
@@ -98,14 +97,16 @@ export class MainComponent implements OnInit {
         //If there is localstorage then check if its expired
         if (this.data.expires < new Date().getTime()) {
           console.warn('Data Expired.');
-          this.getNewData((data: any) => {
+          this.getNewData(() => {
             console.info('New data saved.');
-            this.checkAlerts();
           }); //If it then fetch new data and save it
-        } else {
-          this.checkAlerts();
-          //This checks whenever there is already localstorage and its not expired yet
         }
+        this.checkAlerts();
+        this.maxDate = new Date(
+          this.data.data[this.data.data.length - 1].timestamp
+        );
+        this.maxDate.setHours(this.maxDate.getHours() + 24);
+        //This checks whenever there is already localstorage and its not expired yet
       }, 250);
     }
   }
