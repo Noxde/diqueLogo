@@ -17,15 +17,15 @@ export class AlertComponent implements OnInit {
   faXmark = faXmark;
 
   alertasTexto: alertasInt = {
-    calidad: '(WIP)Alerta calidad de agua afectada.',
+    calidad: 'Alerta calidad de agua afectada.',
     nivelSalida:
-      '(WIP)Alerta nivel salida por cota del dique a 158m.s.n.m, se recomienda suspender todas las actividades recreativas en el embalse.',
+      'Alerta nivel salida por cota del dique a 158m.s.n.m, reservas utiles al 41%.',
     nivel1:
-      '(WIP)Alerta nivel 1 por cota del dique a 155m.s.n.m, se recomienda suspender todas las actividades recreativas en el embalse.',
+      'Alerta nivel 1 por cota del dique a 155m.s.n.m, suspension temporaria de todas las actividades recreativas en el embalse.',
     nivel2:
-      '(WIP)Alerta nivel 2 por cota del dique a 152m.s.n.m, se recomienda suspender todas las actividades recreativas en el embalse.',
+      'Alerta nivel 2 por cota del dique a 152m.s.n.m, prohibicion absoluta de todas las actividades recreativas en el embalse.',
     nivel3:
-      '(WIP)Alerta nivel 3 por cota del dique a 150m.s.n.m, se recomienda suspender todas las actividades recreativas en el embalse.',
+      'Alerta nivel 3 por cota del dique a 150m.s.n.m, prohibicion absoluta de todas las actividades recreativas en el embalse.',
   };
 
   constructor() {}
